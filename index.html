@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>screenshot_garden</title>
+  <style>
+    body {
+        margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: sans-serif;
+  background: #fdfcf9;
+    }
+    h1 { margin: 20px; }
+    p { margin: 20px; }
+    a { text-decoration: none; color: blue; cursor: pointer; }
+    a:hover { text-decoration: underline; background-color: yellow; }
+    
+    #collage {
+      margin-top: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(255,255,255,0.7);
+      border-top: 1px solid black;
+    }
+    #collage img {
+      max-width: 150px;
+      margin: 5px;
+      transform: rotate(var(--angle, 0deg));
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
+    }
+    #collage img:hover {
+      transform: scale(1.1) rotate(var(--angle, 0deg));
+      z-index: 10;
+    }
+    #instructions {
+      font-size: 0.9em;
+      margin: 10px 20px;
+      padding: 8px;
+      border: 1px dashed gray;
+      background: rgba(255,255,200,0.6);
+    }
+    .emoji {
+  position: absolute;
+  font-size: 2rem;
+  animation: float 6s infinite ease-in-out;
+}
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0); }
+}
+#collage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    #collage img {
+      position: absolute;
+      max-width: 80%;
+      max-height: 80%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      object-fit: contain;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      border-radius: 8px;
+      display: none;
+    }
+
+    /* Sidebar menu (hidden by default) */
+    #sidebar {
+      position: fixed;
+      top: 0;
+      left: -250px; /* hidden off screen */
+      width: 250px;
+      height: 100%;
+      background: rgba(255,255,255,0.95);
+      box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+      overflow-y: auto;
+      transition: left 0.3s ease;
+      padding: 1rem;
+      z-index: 10;
+    }
+    #sidebar.open {
+      left: 0;
+    }
+    #sidebar a {
+      display: block;
+      margin-bottom: 0.75rem;
+      color: #333;
+      text-decoration: none;
+    }
+    #sidebar a:hover {
+      text-decoration: underline;
+    }
+
+    /* Menu button */
+    #menuBtn {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      font-size: 1.5rem;
+      background: rgba(255,255,255,0.9);
+      border: none;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 20;
+    }
+  </style>
+</head>
+<body>
+  <h1>screenshot_garden</h1>
+  <div id="instructions">
+    🌱 Instructions:  
+    <ul>
+      <li>Click a filename → the image becomes the <b>background</b>.</li>
+      <li>Shift + Click a filename → the image is <b>planted</b> in the collage at the bottom.</li>
+      <li>Hover over collage images → they grow a little 🌸</li>
+    </ul>
+  </div>
+  <div id="collage"></div>
+  <div id="sidebar">
+
+  <p>
+    ├── <a href="Screenshot 2024-09-05 at 21.03.58.png">Screenshot 2024-09-05 at 21.03.58.png</a><br>
+    ├── <a href="indiginous kenyan body /Screenshot 2023-08-08 at 19.18.13.png">indiginous kenyan body /Screenshot 2023-08-08 at 19.18.13.png</a><br>
+    ├── <a href="indiginous kenyan body /Screenshot 2023-12-02 at 21.36.40.png">indiginous kenyan body /Screenshot 2023-12-02 at 21.36.40.png</a><br>
+    ├── <a href="indiginous kenyan body /Screenshot 2023-12-01 at 11.33.30.png">indiginous kenyan body /Screenshot 2023-12-01 at 11.33.30.png</a><br>
+    ├── <a href="indiginous kenyan body /Screenshot 2023-08-10 at 09.48.53.png">indiginous kenyan body /Screenshot 2023-08-10 at 09.48.53.png</a><br>
+    ├── <a href="indiginous kenyan body /Screenshot 2023-08-10 at 09.42.46.png">indiginous kenyan body /Screenshot 2023-08-10 at 09.42.46.png</a><br>
+    ├── <a href="indiginous kenyan body /Screenshot 2023-08-10 at 09.27.11.png">indiginous kenyan body /Screenshot 2023-08-10 at 09.27.11.png</a><br>
+    ├── <a href="indiginous kenyan body /Screenshot 2023-08-10 at 09.26.38.png">indiginous kenyan body /Screenshot 2023-08-10 at 09.26.38.png</a><br>
+    ├── <a href="indiginous kenyan body /Screenshot 2023-08-10 at 09.23.24.png">indiginous kenyan body /Screenshot 2023-08-10 at 09.23.24.png</a><br>
+    ├── <a href="indiginous kenyan body /Screenshot 2023-08-10 at 09.18.02.png">indiginous kenyan body /Screenshot 2023-08-10 at 09.18.02.png</a><br>
+    ├── <a href="indiginous kenyan body /Screenshot 2023-08-10 at 09.06.28.png">indiginous kenyan body /Screenshot 2023-08-10 at 09.06.28.png</a><br>
+    ├── <a href="indiginous kenyan body /Screenshot 2023-08-08 at 19.18.28.png">indiginous kenyan body /Screenshot 2023-08-08 at 19.18.28.png</a><br>
+    ├── <a href="indiginous kenyan body /Screenshot 2023-08-08 at 13.33.54.png">indiginous kenyan body /Screenshot 2023-08-08 at 13.33.54.png</a><br>
+    ├── <a href="indiginous kenyan body /Screenshot 2023-08-08 at 13.11.08.png">indiginous kenyan body /Screenshot 2023-08-08 at 13.11.08.png</a><br>
+    ├── <a href="indiginous kenyan body /Screenshot 2023-08-08 at 12.52.39.png">indiginous kenyan body /Screenshot 2023-08-08 at 12.52.39.png</a><br>
+    ├── <a href="indiginous kenyan body /Screenshot 2023-08-08 at 12.45.07.png">indiginous kenyan body /Screenshot 2023-08-08 at 12.45.07.png</a><br>
+    ├── <a href="indiginous kenyan body /Screenshot 2023-08-08 at 12.44.03.png">indiginous kenyan body /Screenshot 2023-08-08 at 12.44.03.png</a><br>
+    ├── <a href="indiginous kenyan body /Screenshot 2023-08-08 at 12.43.54.png">indiginous kenyan body /Screenshot 2023-08-08 at 12.43.54.png</a><br>
+    ├── <a href="indiginous kenyan body /Screenshot 2023-08-08 at 12.42.10.png">indiginous kenyan body /Screenshot 2023-08-08 at 12.42.10.png</a><br>
+    ├── <a href="indiginous kenyan body /Screenshot 2023-07-20 at 17.28.49.png">indiginous kenyan body /Screenshot 2023-07-20 at 17.28.49.png</a><br>
+    ├── <a href="indiginous kenyan body /Screenshot 2023-07-20 at 17.27.45.png">indiginous kenyan body /Screenshot 2023-07-20 at 17.27.45.png</a><br>
+    ├── <a href="indiginous kenyan body /Screenshot 2023-07-20 at 17.27.26.png">indiginous kenyan body /Screenshot 2023-07-20 at 17.27.26.png</a><br>
+    ├── <a href="Screenshot 2024-08-27 at 14.45.31.png">Screenshot 2024-08-27 at 14.45.31.png</a><br>
+    ├── <a href="Screenshot 2025-01-18 at 21.49.28.png">Screenshot 2025-01-18 at 21.49.28.png</a><br>
+    ├── <a href="Screenshot 2024-09-10 at 12.30.12.png">Screenshot 2024-09-10 at 12.30.12.png</a><br>
+    ├── <a href="Screenshot 2024-09-05 at 13.54.36.png">Screenshot 2024-09-05 at 13.54.36.png</a><br>
+    ├── <a href="Screenshot 2024-09-05 at 13.53.44.png">Screenshot 2024-09-05 at 13.53.44.png</a><br>
+    ├── <a href="Screenshot 2024-09-03 at 15.36.06.png">Screenshot 2024-09-03 at 15.36.06.png</a><br>
+    ├── <a href="Screenshot 2023-08-20 at 09.22.22.png">Screenshot 2023-08-20 at 09.22.22.png</a><br>
+    ├── <a href="Screenshot 2025-02-01 at 15.50.57.png">Screenshot 2025-02-01 at 15.50.57.png</a><br>
+    ├── <a href="Screenshot 2024-12-20 at 21.00.53.png">Screenshot 2024-12-20 at 21.00.53.png</a><br>
+    ├── <a href="Screenshot 2024-12-11 at 15.34.45.png">Screenshot 2024-12-11 at 15.34.45.png</a><br>
+    ├── <a href="ta-seti.png">ta-seti.png</a><br>
+    ├── <a href="Screenshot 2024-11-21 at 23.21.06.png">Screenshot 2024-11-21 at 23.21.06.png</a><br>
+    ├── <a href="Screenshot 2024-11-19 at 18.56.22.png">Screenshot 2024-11-19 at 18.56.22.png</a><br>
+    ├── <a href="Screenshot 2024-11-18 at 22.28.30.png">Screenshot 2024-11-18 at 22.28.30.png</a><br>
+    ├── <a href="Screenshot 2024-11-18 at 22.26.19.png">Screenshot 2024-11-18 at 22.26.19.png</a><br>
+    ├── <a href="Screenshot 2024-11-18 at 22.24.33.png">Screenshot 2024-11-18 at 22.24.33.png</a><br>
+    ├── <a href="Screenshot 2024-11-18 at 22.13.54.png">Screenshot 2024-11-18 at 22.13.54.png</a><br>
+    ├── <a href="Screenshot 2024-10-29 at 12.27.28.png">Screenshot 2024-10-29 at 12.27.28.png</a><br>
+    ├── <a href="Screenshot 2024-10-29 at 12.26.52.png">Screenshot 2024-10-29 at 12.26.52.png</a><br>
+    ├── <a href="Screenshot 2024-10-29 at 12.26.38.png">Screenshot 2024-10-29 at 12.26.38.png</a><br>
+    ├── <a href="Screenshot 2024-10-29 at 12.26.28.png">Screenshot 2024-10-29 at 12.26.28.png</a><br>
+    ├── <a href="Screenshot 2024-10-29 at 12.26.14.png">Screenshot 2024-10-29 at 12.26.14.png</a><br>
+    ├── <a href="Screenshot 2024-10-26 at 15.40.18.png">Screenshot 2024-10-26 at 15.40.18.png</a><br>
+    ├── <a href="Screenshot 2024-10-20 at 22.38.21.png">Screenshot 2024-10-20 at 22.38.21.png</a><br>
+    ├── <a href="Screenshot 2024-10-19 at 23.15.46.png">Screenshot 2024-10-19 at 23.15.46.png</a><br>
+    ├── <a href="Screenshot 2024-10-19 at 23.15.26.png">Screenshot 2024-10-19 at 23.15.26.png</a><br>
+    ├── <a href="Screenshot 2024-10-19 at 23.14.30.png">Screenshot 2024-10-19 at 23.14.30.png</a><br>
+    ├── <a href="Screenshot 2024-10-19 at 23.12.37.png">Screenshot 2024-10-19 at 23.12.37.png</a><br>
+    ├── <a href="Screenshot 2024-10-19 at 23.11.49.png">Screenshot 2024-10-19 at 23.11.49.png</a><br>
+    ├── <a href="Screenshot 2024-10-19 at 23.11.25.png">Screenshot 2024-10-19 at 23.11.25.png</a><br>
+    ├── <a href="Screenshot 2024-10-19 at 22.35.25.png">Screenshot 2024-10-19 at 22.35.25.png</a><br>
+    ├── <a href="Screenshot 2024-10-19 at 22.33.29.png">Screenshot 2024-10-19 at 22.33.29.png</a><br>
+    ├── <a href="Screenshot 2024-10-19 at 22.33.10.png">Screenshot 2024-10-19 at 22.33.10.png</a><br>
+    ├── <a href="Screenshot 2024-10-19 at 22.32.56.png">Screenshot 2024-10-19 at 22.32.56.png</a><br>
+    ├── <a href="Screenshot 2024-10-19 at 22.26.20.png">Screenshot 2024-10-19 at 22.26.20.png</a><br>
+    ├── <a href="Screenshot 2024-10-19 at 22.25.27.png">Screenshot 2024-10-19 at 22.25.27.png</a><br>
+    ├── <a href="Screenshot 2024-10-19 at 22.23.05.png">Screenshot 2024-10-19 at 22.23.05.png</a><br>
+    ├── <a href="Screenshot 2024-10-19 at 22.19.36.png">Screenshot 2024-10-19 at 22.19.36.png</a><br>
+    ├── <a href="Screenshot 2024-10-19 at 22.14.11.png">Screenshot 2024-10-19 at 22.14.11.png</a><br>
+    ├── <a href="Screenshot 2024-10-16 at 14.10.10.png">Screenshot 2024-10-16 at 14.10.10.png</a><br>
+    ├── <a href="Screenshot 2024-10-02 at 11.35.42.png">Screenshot 2024-10-02 at 11.35.42.png</a><br>
+    ├── <a href="Screenshot 2024-10-02 at 08.51.54.png">Screenshot 2024-10-02 at 08.51.54.png</a><br>
+    ├── <a href="Screenshot 2024-09-26 at 22.02.27.png">Screenshot 2024-09-26 at 22.02.27.png</a><br>
+    ├── <a href="Screenshot 2024-09-19 at 21.04.00.png">Screenshot 2024-09-19 at 21.04.00.png</a><br>
+    ├── <a href="Screenshot 2024-09-19 at 20.54.11.png">Screenshot 2024-09-19 at 20.54.11.png</a><br>
+    ├── <a href="Screenshot 2024-09-11 at 10.37.17.png">Screenshot 2024-09-11 at 10.37.17.png</a><br>
+    ├── <a href="23.png">23.png</a><br>
+    ├── <a href="Screenshot 2024-08-20 at 18.22.30.png">Screenshot 2024-08-20 at 18.22.30.png</a><br>
+    ├── <a href="Screenshot 2024-08-09 at 10.27.51.png">Screenshot 2024-08-09 at 10.27.51.png</a><br>
+    ├── <a href="22.png">22.png</a><br>
+    ├── <a href="Screenshot 2024-07-30 at 16.19.07.png">Screenshot 2024-07-30 at 16.19.07.png</a><br>
+    ├── <a href="Screenshot 2024-07-30 at 16.19.02.png">Screenshot 2024-07-30 at 16.19.02.png</a><br>
+    ├── <a href="Screenshot 2024-07-17 at 11.33.12.png">Screenshot 2024-07-17 at 11.33.12.png</a><br>
+    ├── <a href="community garden.png">community garden.png</a><br>
+    ├── <a href="Screenshot 2024-07-06 at 11.54.11.png">Screenshot 2024-07-06 at 11.54.11.png</a><br>
+    ├── <a href="mto.png">mto.png</a><br>
+    ├── <a href="15.png">15.png</a><br>
+    ├── <a href="Screenshot 2024-05-30 at 19.57.05.png">Screenshot 2024-05-30 at 19.57.05.png</a><br>
+    ├── <a href="Screenshot 2024-05-30 at 18.00.47.png">Screenshot 2024-05-30 at 18.00.47.png</a><br>
+    ├── <a href="Screenshot 2024-05-30 at 18.00.33.png">Screenshot 2024-05-30 at 18.00.33.png</a><br>
+    ├── <a href="Screenshot 2024-05-30 at 16.28.09.png">Screenshot 2024-05-30 at 16.28.09.png</a><br>
+    ├── <a href="Screenshot 2024-04-09 at 17.35.35.png">Screenshot 2024-04-09 at 17.35.35.png</a><br>
+    ├── <a href="Screenshot 2024-04-05 at 23.19.31.png">Screenshot 2024-04-05 at 23.19.31.png</a><br>
+    ├── <a href="Ancestral Technologies excerpt.jpg">Ancestral Technologies excerpt.jpg</a><br>
+    ├── <a href="a place to listen.png">a place to listen.png</a><br>
+    ├── <a href="encrypted homepage.png">encrypted homepage.png</a><br>
+    ├── <a href="unencryted text on homepage.png">unencryted text on homepage.png</a><br>
+    ├── <a href="Screenshot 2024-02-28 at 10.33.05.png">Screenshot 2024-02-28 at 10.33.05.png</a><br>
+    ├── <a href="Screenshot 2024-02-22 at 18.54.50.png">Screenshot 2024-02-22 at 18.54.50.png</a><br>
+    ├── <a href="Screenshot 2024-02-20 at 23.35.48.png">Screenshot 2024-02-20 at 23.35.48.png</a><br>
+    ├── <a href="Screenshot 2024-02-20 at 23.12.56.png">Screenshot 2024-02-20 at 23.12.56.png</a><br>
+    ├── <a href="Screenshot 2024-02-20 at 23.12.31.png">Screenshot 2024-02-20 at 23.12.31.png</a><br>
+    ├── <a href="Screenshot 2024-02-19 at 15.02.34.png">Screenshot 2024-02-19 at 15.02.34.png</a><br>
+    ├── <a href="Screenshot 2024-02-19 at 15.02.02.png">Screenshot 2024-02-19 at 15.02.02.png</a><br>
+    ├── <a href="Screenshot 2024-02-13 at 20.55.11.png">Screenshot 2024-02-13 at 20.55.11.png</a><br>
+    ├── <a href="victoria signature.png">victoria signature.png</a><br>
+    ├── <a href="Screenshot 2024-01-18 at 16.47.21.png">Screenshot 2024-01-18 at 16.47.21.png</a><br>
+    ├── <a href="Screenshot 2024-01-04 at 12.27.52.png">Screenshot 2024-01-04 at 12.27.52.png</a><br>
+    ├── <a href="Screenshot 2023-12-20 at 14.36.29.png">Screenshot 2023-12-20 at 14.36.29.png</a><br>
+    ├── <a href="Screenshot 2023-12-19 at 08.41.21.png">Screenshot 2023-12-19 at 08.41.21.png</a><br>
+    ├── <a href="Screenshot 2023-12-19 at 08.40.42.png">Screenshot 2023-12-19 at 08.40.42.png</a><br>
+    ├── <a href="Screenshot 2023-12-15 at 12.43.35.png">Screenshot 2023-12-15 at 12.43.35.png</a><br>
+    ├── <a href="Screenshot 2023-12-01 at 11.44.59.png">Screenshot 2023-12-01 at 11.44.59.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.46.59.png">community proverbs/Screenshot 2023-11-27 at 16.46.59.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.46.19.png">community proverbs/Screenshot 2023-11-27 at 16.46.19.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.45.57.png">community proverbs/Screenshot 2023-11-27 at 16.45.57.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.44.51.png">community proverbs/Screenshot 2023-11-27 at 16.44.51.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.44.24.png">community proverbs/Screenshot 2023-11-27 at 16.44.24.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.44.02.png">community proverbs/Screenshot 2023-11-27 at 16.44.02.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.43.40.png">community proverbs/Screenshot 2023-11-27 at 16.43.40.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.43.17.png">community proverbs/Screenshot 2023-11-27 at 16.43.17.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.42.42.png">community proverbs/Screenshot 2023-11-27 at 16.42.42.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.42.16.png">community proverbs/Screenshot 2023-11-27 at 16.42.16.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.41.53.png">community proverbs/Screenshot 2023-11-27 at 16.41.53.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.41.22.png">community proverbs/Screenshot 2023-11-27 at 16.41.22.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.40.59.png">community proverbs/Screenshot 2023-11-27 at 16.40.59.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.40.36.png">community proverbs/Screenshot 2023-11-27 at 16.40.36.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.40.12.png">community proverbs/Screenshot 2023-11-27 at 16.40.12.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.39.46.png">community proverbs/Screenshot 2023-11-27 at 16.39.46.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.39.31.png">community proverbs/Screenshot 2023-11-27 at 16.39.31.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.39.02.png">community proverbs/Screenshot 2023-11-27 at 16.39.02.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.38.38.png">community proverbs/Screenshot 2023-11-27 at 16.38.38.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.38.21.png">community proverbs/Screenshot 2023-11-27 at 16.38.21.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.38.12.png">community proverbs/Screenshot 2023-11-27 at 16.38.12.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.37.58.png">community proverbs/Screenshot 2023-11-27 at 16.37.58.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.37.11.png">community proverbs/Screenshot 2023-11-27 at 16.37.11.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.36.23.png">community proverbs/Screenshot 2023-11-27 at 16.36.23.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.35.59.png">community proverbs/Screenshot 2023-11-27 at 16.35.59.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.35.32.png">community proverbs/Screenshot 2023-11-27 at 16.35.32.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.35.18.png">community proverbs/Screenshot 2023-11-27 at 16.35.18.png</a><br>
+    ├── <a href="community proverbs/Screenshot 2023-11-27 at 16.35.03.png">community proverbs/Screenshot 2023-11-27 at 16.35.03.png</a><br>
+    ├── <a href="Screenshot 2023-11-10 at 15.02.05.png">Screenshot 2023-11-10 at 15.02.05.png</a><br>
+    ├── <a href="Screenshot 2023-10-03 at 22.25.12.png">Screenshot 2023-10-03 at 22.25.12.png</a><br>
+    ├── <a href="Screenshot 2023-09-28 at 12.43.14.png">Screenshot 2023-09-28 at 12.43.14.png</a><br>
+    ├── <a href="Screenshot 2023-09-28 at 12.37.15.png">Screenshot 2023-09-28 at 12.37.15.png</a><br>
+    ├── <a href="Screenshot 2023-09-28 at 11.48.34.png">Screenshot 2023-09-28 at 11.48.34.png</a><br>
+    ├── <a href="Screenshot 2023-09-28 at 11.44.34.png">Screenshot 2023-09-28 at 11.44.34.png</a><br>
+    ├── <a href="Screenshot 2023-09-28 at 11.40.43.png">Screenshot 2023-09-28 at 11.40.43.png</a><br>
+    ├── <a href="Screenshot 2023-09-28 at 11.40.15.png">Screenshot 2023-09-28 at 11.40.15.png</a><br>
+    ├── <a href="Screenshot 2023-08-22 at 16.19.30.png">Screenshot 2023-08-22 at 16.19.30.png</a><br>
+    ├── <a href="Screenshot 2023-08-19 at 11.19.38.png">Screenshot 2023-08-19 at 11.19.38.png</a><br>
+    ├── <a href="Screenshot 2023-08-11 at 20.40.51.png">Screenshot 2023-08-11 at 20.40.51.png</a><br>
+    ├── <a href="Screenshot 2023-08-08 at 19.20.28.png">Screenshot 2023-08-08 at 19.20.28.png</a><br>
+    ├── <a href="Screenshot 2023-08-08 at 11.40.17.png">Screenshot 2023-08-08 at 11.40.17.png</a><br>
+    ├── <a href="Screenshot 2023-08-07 at 17.30.18.png">Screenshot 2023-08-07 at 17.30.18.png</a><br>
+    ├── <a href="comp.png">comp.png</a><br>
+    ├── <a href="Screenshot 2023-08-03 at 11.11.39.png">Screenshot 2023-08-03 at 11.11.39.png</a><br>
+    ├── <a href="Screenshot 2023-08-01 at 19.46.31.png">Screenshot 2023-08-01 at 19.46.31.png</a><br>
+    ├── <a href="Screenshot 2023-07-26 at 15.18.15.png">Screenshot 2023-07-26 at 15.18.15.png</a><br>
+    ├── <a href="piggy.png">piggy.png</a><br>
+    ├── <a href="Screenshot 2023-07-21 at 19.05.21.png">Screenshot 2023-07-21 at 19.05.21.png</a><br>
+    ├── <a href="Screenshot 2023-07-14 at 22.27.46.png">Screenshot 2023-07-14 at 22.27.46.png</a><br>
+  </p>
+</div>
+  <button id="menuBtn">☰</button>
+
+  <div id="emojiGarden"></div>
+
+
+  <script>
+   const collage = document.getElementById("collage");
+    const sidebar = document.getElementById("sidebar");
+    const menuBtn = document.getElementById("menuBtn");
+
+    // Toggle sidebar
+    menuBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("open");
+    });
+
+    // Close sidebar if clicking outside
+    document.addEventListener("click", (e) => {
+      if (!sidebar.contains(e.target) && e.target !== menuBtn) {
+        sidebar.classList.remove("open");
+      }
+    });
+
+    // Image display logic
+    document.querySelectorAll("#sidebar a").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        // Hide old images
+        document.querySelectorAll("#collage img").forEach(img => img.remove());
+
+        const img = document.createElement("img");
+        img.src = link.getAttribute("href");
+        img.style.display = "block";
+        collage.appendChild(img);
+
+        sidebar.classList.remove("open"); // auto-close menu after choosing
+      });
+    });  
+    const emojis = ["🌸","🪴","🪲","🌱","🌼","🦋"];
+for (let i = 0; i < 95; i++) {
+  const span = document.createElement("span");
+  span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+  span.className = "emoji";
+  span.style.left = Math.random() * 100 + "vw";
+  span.style.top = Math.random() * 100 + "vh";
+  document.getElementById("emojiGarden").appendChild(span);
+}
+links.forEach(link => {
+  let pressTimer;
+
+  // Desktop Shift+Click
+  link.addEventListener("click", e => {
+    if (e.shiftKey) {
+      e.preventDefault();
+      plantImage(e.target.getAttribute("data-file"));
+    } else {
+      e.preventDefault();
+      setBackground(e.target.getAttribute("data-file"));
+    }
+  });
+
+  // Mobile long press = plant
+  link.addEventListener("touchstart", e => {
+    pressTimer = setTimeout(() => {
+      plantImage(e.target.getAttribute("data-file"));
+    }, 500); // 0.5s hold
+  });
+
+  link.addEventListener("touchend", () => clearTimeout(pressTimer));
+});
+
+  </script>
+</body>
+</html>
