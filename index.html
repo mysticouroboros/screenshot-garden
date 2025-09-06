@@ -5,44 +5,16 @@
   <title>screenshot_garden</title>
   <style>
     body {
-        margin: 0;
-  height: 100vh;
-  overflow: hidden;
-  font-family: sans-serif;
-  background: #fdfcf9;
+    display: flex;
+    margin: 0;
+    font-family: sans-serif;
     }
     h1 { margin: 20px; }
     p { margin: 20px; }
     a { text-decoration: none; color: blue; cursor: pointer; }
     a:hover { text-decoration: underline; background-color: yellow; }
     
-    #collage {
-      margin-top: auto;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 20px;
-      background: rgba(255,255,255,0.7);
-      border-top: 1px solid black;
-    }
-    #collage img {
-      max-width: 150px;
-      margin: 5px;
-      transform: rotate(var(--angle, 0deg));
-      box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
-      transition: transform 0.3s;
-    }
-    #collage img:hover {
-      transform: scale(1.1) rotate(var(--angle, 0deg));
-      z-index: 10;
-    }
-    #instructions {
-      font-size: 0.9em;
-      margin: 10px 20px;
-      padding: 8px;
-      border: 1px dashed gray;
-      background: rgba(255,255,200,0.6);
-    }
+   
     .emoji {
   position: absolute;
   font-size: 2rem;
@@ -53,35 +25,67 @@
   50% { transform: translateY(-20px); }
   100% { transform: translateY(0); }
 }
+  /* Main content */
+  #main {
+    margin-left: 240px; /* leave space for sidebar */
+    padding: 2rem;
+    flex: 1;
+  }
 
+  #main h1 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
 
-    /* Sidebar menu (hidden by default) */
+  /* Collage grid */
+  #collage {
+    display: grid;
+    gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  #collage img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    object-fit: cover;
+  }
+
+  #collage img:hover {
+    transform: scale(1.05);
+  }
+
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
     #sidebar {
-      position: fixed;
-      top: 0;
-      left: -250px; /* hidden off screen */
-      width: 250px;
-      height: 100%;
-      background: rgba(255,255,255,0.95);
-      box-shadow: 2px 0 5px rgba(0,0,0,0.2);
-      overflow-y: auto;
-      transition: left 0.3s ease;
+      width: 160px;
+    }
+    #main {
+      margin-left: 180px;
       padding: 1rem;
-      z-index: 10;
     }
-    #sidebar.open {
-      left: 0;
+    #collage {
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     }
-    #sidebar a {
-      display: block;
-      margin-bottom: 0.75rem;
-      color: #333;
-      text-decoration: none;
-    }
-    #sidebar a:hover {
-      text-decoration: underline;
-    }
+  }
 
+  @media (max-width: 500px) {
+    #sidebar {
+      position: static;
+      width: 100%;
+      height: auto;
+    }
+    #main {
+      margin-left: 0;
+    }
+    #collage {
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+  }
+
+   
     /* Menu button */
     #menuBtn {
       position: fixed;
