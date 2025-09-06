@@ -4,11 +4,13 @@
   <meta charset="UTF-8">
   <title>screenshot_garden</title>
   <style>
-    body {
-    display: flex;
-    margin: 0;
-    font-family: sans-serif;
-    }
+   body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: sans-serif;
+  background: #fdfcf9;
+}
     h1 { margin: 20px; }
     p { margin: 20px; }
     a { text-decoration: none; color: blue; cursor: pointer; }
@@ -25,37 +27,66 @@
   50% { transform: translateY(-20px); }
   100% { transform: translateY(0); }
 }
-  /* Main content */
-  #main {
-    margin-left: 240px; /* leave space for sidebar */
-    padding: 2rem;
-    flex: 1;
-  }
+   /* Collage background (main image viewer) */
+    #collage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    #collage img {
+      position: absolute;
+      max-width: 80%;
+      max-height: 80%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      object-fit: contain;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      border-radius: 8px;
+      display: none;
+    }
 
-  #main h1 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-  }
+    /* Sidebar menu (hidden by default) */
+    #sidebar {
+      position: fixed;
+      top: 0;
+      left: -250px; /* hidden off screen */
+      width: 250px;
+      height: 100%;
+      background: rgba(255,255,255,0.95);
+      box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+      overflow-y: auto;
+      transition: left 0.3s ease;
+      padding: 1rem;
+      z-index: 10;
+    }
+    #sidebar.open {
+      left: 0;
+    }
+    #sidebar a {
+      display: block;
+      margin-bottom: 0.75rem;
+      color: #333;
+      text-decoration: none;
+    }
+    #sidebar a:hover {
+      text-decoration: underline;
+    }
 
-  /* Collage grid */
-  #collage {
-    display: grid;
-    gap: 15px;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  }
-
-  #collage img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    object-fit: cover;
-  }
-
-  #collage img:hover {
-    transform: scale(1.05);
-  }
+    /* Menu button */
+    #menuBtn {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      font-size: 1.5rem;
+      background: rgba(255,255,255,0.9);
+      border: none;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 20;
+    }
 
   /* Mobile optimizations */
   @media (max-width: 768px) {
